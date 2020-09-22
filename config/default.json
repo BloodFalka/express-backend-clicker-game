@@ -1,0 +1,5 @@
+{
+    "port": 5000,
+    "jwtSecret": "ludaMyGirl",
+    "mongoUri": "mongodb+srv://bloodfalka:wocqMOwymWjKQ9Nz@cluster0.be4h2.mongodb.net/clicker-game?retryWrites=true&w=majority"
+}
