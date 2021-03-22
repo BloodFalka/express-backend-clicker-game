@@ -8,6 +8,8 @@ const  resolvers = require('./resolvers')
 
 const aplServer = new ApolloServer({typeDefs, resolvers})
 
+const mongoDB = process.env.MONGODB_URI || config.get('mongoUri');
+
 const app = express()
 
 app.use(express.json({ extended: true }))
@@ -28,7 +30,7 @@ const PORT = config.get('port') || 5000
 
 async function start() {
 	try {
-		await mongoose.connect(config.get('mongoUri'), {
+		await mongoose.connect(mongoDB, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
 			useCreateIndex: true,
