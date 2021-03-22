@@ -26,7 +26,7 @@ router.post(
 			}
 
 			const { username, password } = req.body
-
+			
 			const candidate = await User.findOne({ username })
 
 			if (candidate) {

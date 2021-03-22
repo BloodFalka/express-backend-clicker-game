@@ -1,0 +1,50 @@
+{
+    "common":[
+        {
+            "name": "test",
+            "lvl": 100,
+            "imgUrl": "pets/panda.png",
+            "itemId": "colCm1"
+        }
+    ],
+    "uncommon":[
+        {
+            "name": "test",
+            "lvl": 100,
+            "imgUrl": "pets/panda.png",
+            "itemId": "colUc1"
+        }
+    ],
+    "rare":[
+        {
+            "name": "test",
+            "lvl": 1,
+            "imgUrl": "pets/panda.png",
+            "itemId": "colRa1"
+        }
+    ],
+    "epic":[
+        {
+            "name": "test",
+            "lvl": 1,
+            "imgUrl": "pets/panda.png",
+            "itemId": "colEp1"
+        }
+    ],
+    "legendary":[
+        {
+            "name": "test",
+            "lvl": 1,
+            "imgUrl": "pets/maya.png",
+            "itemId": "colLe1"
+        }
+    ],
+    "exotic":[
+        {
+            "name": "test",
+            "lvl": 1,
+            "imgUrl": "pets/erzhan.png",
+            "itemId": "colEx1"
+        }
+    ]
+}

@@ -1,0 +1,50 @@
+{
+    "common":[
+        {
+            "name": "test",
+            "lvl": 100,
+            "imgUrl": "pets/panda.png",
+            "itemId": "eqCm1"
+        }
+    ],
+    "uncommon":[
+        {
+            "name": "test",
+            "lvl": 100,
+            "imgUrl": "pets/panda.png",
+            "itemId": "eqUc1"
+        }
+    ],
+    "rare":[
+        {
+            "name": "test",
+            "lvl": 100,
+            "imgUrl": "pets/panda.png",
+            "itemId": "eqRa1"
+        }
+    ],
+    "epic":[
+        {
+            "name": "панда",
+            "lvl": 1,
+            "imgUrl": "pets/panda.png",
+            "itemId": "eqEp1"
+        }
+    ],
+    "legendary":[
+        {
+            "name": "мая",
+            "lvl": 1,
+            "imgUrl": "pets/maya.png",
+            "itemId": "eqLe1"
+        }
+    ],
+    "exotic":[
+        {
+            "name": "єржан",
+            "lvl": 1,
+            "imgUrl": "pets/erzhan.png",
+            "itemId": "eqEx1"
+        }
+    ]
+}

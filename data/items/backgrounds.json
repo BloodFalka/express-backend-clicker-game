@@ -1,0 +1,34 @@
+{
+    "rare":[
+        {
+            "name": "test",
+            "lvl": 100,
+            "imgUrl": "pets/panda.png",
+            "itemId": "bgRa1"
+        }
+    ],
+    "epic":[
+        {
+            "name": "панда",
+            "lvl": 1,
+            "imgUrl": "pets/panda.png",
+            "itemId": "bgEp1"
+        }
+    ],
+    "legendary":[
+        {
+            "name": "мая",
+            "lvl": 1,
+            "imgUrl": "pets/maya.png",
+            "itemId": "bgLe1"
+        }
+    ],
+    "exotic":[
+        {
+            "name": "єржан",
+            "lvl": 1,
+            "imgUrl": "pets/erzhan.png",
+            "itemId": "bgEx1"
+        }
+    ]
+}
