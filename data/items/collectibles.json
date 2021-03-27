@@ -1,49 +1,49 @@
 {
     "common":[
         {
-            "name": "test",
-            "lvl": 100,
-            "imgUrl": "pets/panda.png",
+            "name": "Рибний Торт",
+            "lvl": 1,
+            "imgUrl": "collect/tort.png",
             "itemId": "colCm1"
         }
     ],
     "uncommon":[
         {
-            "name": "test",
-            "lvl": 100,
-            "imgUrl": "pets/panda.png",
+            "name": "Келих",
+            "lvl": 1,
+            "imgUrl": "collect/ctakan.png",
             "itemId": "colUc1"
         }
     ],
     "rare":[
         {
-            "name": "test",
+            "name": "Рідкісний Келих",
             "lvl": 1,
-            "imgUrl": "pets/panda.png",
+            "imgUrl": "collect/ctakan.png",
             "itemId": "colRa1"
         }
     ],
     "epic":[
         {
-            "name": "test",
+            "name": "Епічний Келих",
             "lvl": 1,
-            "imgUrl": "pets/panda.png",
+            "imgUrl": "collect/ctakan.png",
             "itemId": "colEp1"
         }
     ],
     "legendary":[
         {
-            "name": "test",
+            "name": "Легендарний Келих",
             "lvl": 1,
-            "imgUrl": "pets/maya.png",
+            "imgUrl": "collect/ctakan.png",
             "itemId": "colLe1"
         }
     ],
     "exotic":[
         {
-            "name": "test",
+            "name": "Екзотичний Келих",
             "lvl": 1,
-            "imgUrl": "pets/erzhan.png",
+            "imgUrl": "collect/ctakan.png",
             "itemId": "colEx1"
         }
     ]

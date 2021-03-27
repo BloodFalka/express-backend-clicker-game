@@ -21,18 +21,18 @@ const schema = new Schema({
 			},
 		},
 	},
-	inventory: [
-		{
-			name: String,
-			lvl: Number,
-			imgUrl: String,
-			category: String,
-			rarity: String,
-			itemId: String,
-			numInWorld: Number,
-			numInInv: Number
-		}
-	],
+	// inventory: [
+	// 	{
+	// 		name: String,
+	// 		lvl: Number,
+	// 		imgUrl: String,
+	// 		category: String,
+	// 		rarity: String,
+	// 		itemId: String,
+	// 		numInWorld: Number,
+	// 		numInInv: Number,
+	// 	}
+	// ],
 })
 
 module.exports = model('User', schema)

@@ -1,20 +1,4 @@
 {
-    "rare":[
-        {
-            "name": "test",
-            "lvl": 100,
-            "imgUrl": "pets/panda.png",
-            "itemId": "bgRa1"
-        }
-    ],
-    "epic":[
-        {
-            "name": "панда",
-            "lvl": 1,
-            "imgUrl": "pets/panda.png",
-            "itemId": "bgEp1"
-        }
-    ],
     "legendary":[
         {
             "name": "мая",

@@ -1,7 +1,8 @@
-{
-    "avatars": 0.1,
-    "pets": 0.2,
-    "backgrounds": 0.1,
-    "equipments": 39.6,
-    "collectibles": 60
-}
+
+[
+    {"collectibles": 60},
+    {"equipments": 39.6},
+    {"pets": 0.2},
+    {"avatars": 0.1},
+    {"backgrounds": 0.1}
+]

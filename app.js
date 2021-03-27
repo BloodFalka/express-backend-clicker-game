@@ -26,8 +26,8 @@ app.use('/api/user', require('./routes/user.routes'))
 app.use('/api/stats', require('./routes/stats.routes'))
 aplServer.applyMiddleware({app})
 
-// const PORT = config.get('port') || 5000
-const PORT = process.env.PORT || 80
+//const PORT = config.get('port') || 5000
+const PORT = process.env.PORT || 5000
 async function start() {
 	try {
 		await mongoose.connect(mongoDB, {

@@ -1,49 +1,91 @@
 {
     "common":[
         {
-            "name": "test",
-            "lvl": 100,
-            "imgUrl": "pets/panda.png",
+            "name": "з Єви (не аніме)",
+            "lvl": 1,
+            "imgUrl": "brushes/cm/brush1.png",
             "itemId": "eqCm1"
+        },
+        {
+            "name": "Шкребок Відьми",
+            "lvl": 2,
+            "imgUrl": "brushes/cm/brush10.png",
+            "itemId": "eqCm2"
+        },
+        {
+            "name": "Лісова Галявина",
+            "lvl": 3,
+            "imgUrl": "brushes/cm/brush13.png",
+            "itemId": "eqCm3"
         }
     ],
     "uncommon":[
         {
-            "name": "test",
-            "lvl": 100,
-            "imgUrl": "pets/panda.png",
+            "name": "Твайлайт Спаркл",
+            "lvl": 5,
+            "imgUrl": "brushes/uc/brush2.png",
             "itemId": "eqUc1"
+        },
+        {
+            "name": "Радаґаст Брунатний",
+            "lvl": 10,
+            "imgUrl": "brushes/uc/brush5.png",
+            "itemId": "eqUc2"
+        },
+        {
+            "name": "Сірість",
+            "lvl": 15,
+            "imgUrl": "brushes/uc/brush6.png",
+            "itemId": "eqUc3"
+        },
+        {
+            "name": "Хмаринка",
+            "lvl": 20,
+            "imgUrl": "brushes/uc/brush12.png",
+            "itemId": "eqUc4"
         }
     ],
     "rare":[
         {
-            "name": "test",
-            "lvl": 100,
-            "imgUrl": "pets/panda.png",
+            "name": "Золотце",
+            "lvl": 25,
+            "imgUrl": "brushes/ra/brush3.png",
             "itemId": "eqRa1"
+        },
+        {
+            "name": "Бубльгум",
+            "lvl": 35,
+            "imgUrl": "brushes/ra/brush7.png",
+            "itemId": "eqRa2"
         }
     ],
     "epic":[
         {
-            "name": "панда",
-            "lvl": 1,
-            "imgUrl": "pets/panda.png",
+            "name": "Весняночка",
+            "lvl": 30,
+            "imgUrl": "brushes/ep/brush4.png",
             "itemId": "eqEp1"
         }
     ],
     "legendary":[
         {
-            "name": "мая",
-            "lvl": 1,
-            "imgUrl": "pets/maya.png",
+            "name": "MTV",
+            "lvl": 100,
+            "imgUrl": "brushes/le/brush8.png",
             "itemId": "eqLe1"
+        },
+        {
+            "name": "Скакалочка",
+            "lvl": 100,
+            "imgUrl": "brushes/le/brush11.png",
+            "itemId": "eqLe2"
         }
     ],
     "exotic":[
         {
-            "name": "єржан",
-            "lvl": 1,
-            "imgUrl": "pets/erzhan.png",
+            "name": "Висмоктувач Шерсті",
+            "lvl": 1000,
+            "imgUrl": "brushes/ex/brush9.png",
             "itemId": "eqEx1"
         }
     ]

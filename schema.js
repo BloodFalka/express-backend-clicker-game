@@ -7,7 +7,7 @@ const typeDefs = gql`
     password: String!,
     stats: Stats!,
     gold: Int!,
-    inventory: [Item],
+    # inventory: [Item],
   },
 
   type Stats {
@@ -46,16 +46,18 @@ const typeDefs = gql`
 
   type Query {
     users: [User!]!,
-    user(username: String): User,
+    user(username: String!): User!,
+    me(username: String!, password: String!): GetMeResponce!,
+    inventory(userId: String!): GetInvResponce!,
   }
 
   type Mutation {
-        addUser (username: String!, password: String!, userId: String!): User!,
-        changeGoldAmount (userId: String!, amount: Int!): UserUpdateResponce!,
+        addUser (username: String!, password: String!): UpdateResponce!,
+        changeGoldAmount (userId: String!, amount: Int!): UpdateResponce!,
         addItemToInventory (userId: String!): NewItemResponce!
     }
 
-    type UserUpdateResponce {
+    type UpdateResponce {
       success: Boolean!
       message: String!
       user: User
@@ -64,7 +66,20 @@ const typeDefs = gql`
     type NewItemResponce {
       success: Boolean!
       message: String!
-      item: Item!
+      item: Item
+    }
+
+    type GetMeResponce {
+      success: Boolean!
+      message: String!
+      user: User
+      token: String
+    }
+
+    type GetInvResponce{
+      success: Boolean!
+      message: String!
+      items: [Item]
     }
 `;
 
