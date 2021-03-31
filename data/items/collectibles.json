@@ -13,6 +13,18 @@
             "lvl": 1,
             "imgUrl": "collect/ctakan.png",
             "itemId": "colUc1"
+        },
+        {
+            "name": "Cушка",
+            "lvl": 1,
+            "imgUrl": "collect/susi.png",
+            "itemId": "colUc2"
+        },
+        {
+            "name": "Корзинка радості",
+            "lvl": 1,
+            "imgUrl": "collect/korzina.png",
+            "itemId": "colUc3"
         }
     ],
     "rare":[

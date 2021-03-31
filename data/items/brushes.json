@@ -4,19 +4,19 @@
             "name": "з Єви (не аніме)",
             "lvl": 1,
             "imgUrl": "brushes/cm/brush1.png",
-            "itemId": "eqCm1"
+            "itemId": "brCm1"
         },
         {
             "name": "Шкребок Відьми",
             "lvl": 2,
             "imgUrl": "brushes/cm/brush10.png",
-            "itemId": "eqCm2"
+            "itemId": "brCm2"
         },
         {
             "name": "Лісова Галявина",
             "lvl": 3,
             "imgUrl": "brushes/cm/brush13.png",
-            "itemId": "eqCm3"
+            "itemId": "brCm3"
         }
     ],
     "uncommon":[
@@ -24,25 +24,25 @@
             "name": "Твайлайт Спаркл",
             "lvl": 5,
             "imgUrl": "brushes/uc/brush2.png",
-            "itemId": "eqUc1"
+            "itemId": "brUc1"
         },
         {
             "name": "Радаґаст Брунатний",
             "lvl": 10,
             "imgUrl": "brushes/uc/brush5.png",
-            "itemId": "eqUc2"
+            "itemId": "brUc2"
         },
         {
             "name": "Сірість",
             "lvl": 15,
             "imgUrl": "brushes/uc/brush6.png",
-            "itemId": "eqUc3"
+            "itemId": "brUc3"
         },
         {
             "name": "Хмаринка",
             "lvl": 20,
             "imgUrl": "brushes/uc/brush12.png",
-            "itemId": "eqUc4"
+            "itemId": "brUc4"
         }
     ],
     "rare":[
@@ -50,13 +50,13 @@
             "name": "Золотце",
             "lvl": 25,
             "imgUrl": "brushes/ra/brush3.png",
-            "itemId": "eqRa1"
+            "itemId": "brRa1"
         },
         {
             "name": "Бубльгум",
             "lvl": 35,
             "imgUrl": "brushes/ra/brush7.png",
-            "itemId": "eqRa2"
+            "itemId": "brRa2"
         }
     ],
     "epic":[
@@ -64,7 +64,7 @@
             "name": "Весняночка",
             "lvl": 30,
             "imgUrl": "brushes/ep/brush4.png",
-            "itemId": "eqEp1"
+            "itemId": "brEp1"
         }
     ],
     "legendary":[
@@ -72,13 +72,13 @@
             "name": "MTV",
             "lvl": 100,
             "imgUrl": "brushes/le/brush8.png",
-            "itemId": "eqLe1"
+            "itemId": "brLe1"
         },
         {
             "name": "Скакалочка",
             "lvl": 100,
             "imgUrl": "brushes/le/brush11.png",
-            "itemId": "eqLe2"
+            "itemId": "brLe2"
         }
     ],
     "exotic":[
@@ -86,7 +86,7 @@
             "name": "Висмоктувач Шерсті",
             "lvl": 1000,
             "imgUrl": "brushes/ex/brush9.png",
-            "itemId": "eqEx1"
+            "itemId": "brEx1"
         }
     ]
 }

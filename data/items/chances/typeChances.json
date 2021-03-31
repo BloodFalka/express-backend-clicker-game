@@ -1,8 +1,10 @@
 
 [
-    {"collectibles": 60},
-    {"equipments": 39.6},
-    {"pets": 0.2},
-    {"avatars": 0.1},
-    {"backgrounds": 0.1}
+    {"collectible": 50},
+    {"brush": 24.3},
+    {"scissors": 24.3},
+    {"potion": 1},
+    {"pet": 0.2},
+    {"avatar": 0.1},
+    {"background": 0.1}
 ]

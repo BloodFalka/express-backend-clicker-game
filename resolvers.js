@@ -7,6 +7,7 @@ const Item = require("./models/Item")
 const config = require('config')
 const jwt = require('jsonwebtoken')
 
+const mongoose = require('mongoose')
 const colors = require('colors');
 
 
@@ -39,20 +40,29 @@ const resolvers = {
             //Шифрування паролю
             const hashedPassword = await bcrypt.hash(password, 12)
             //Генерація id
-			const nanoid = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz', 10)
+			// const nanoid = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz', 10)
 
             //Створення нового користувача
             const userObj = new User({
                 username,
                 password: hashedPassword,
-                userId: nanoid()
+                // userId: nanoid()
             })
 
             const inventoryObj = new Inventory({
                 _id: userObj._id,
             })
 
-           
+            const token = jwt.sign(
+                {
+                    username,
+                    userId: userObj._id
+                }, 
+                config.get('jwtSecret'), 
+                { expiresIn: '1m' }
+                )
+
+                console.log(jwt.decode(token))
 
             return userObj.save()
                 .then(result => {
@@ -60,7 +70,8 @@ const resolvers = {
                     return {
                         success: true,
                         message: 'Користувач успішно створений',
-                        user: {...result._doc}
+                        user: {...result._doc},
+                        token
                     }
                     
                 })
@@ -71,7 +82,8 @@ const resolvers = {
 
         async addItemToInventory (parent, args, context, info){
             console.log("👘👘👘👘👘👘👘👘👘👘👘👘👘👘")
-            const {userId} = args
+            const {token} = args,
+            userId = jwt.decode(token).userId;
 
             let numInWorld;
 
@@ -83,7 +95,8 @@ const resolvers = {
             const newItem = {
                     ...equalRandomFromArray(items[category][rarity]),
                     rarity,
-                    category
+                    category,
+                    updateTime: new Date()
                 }
 
             console.log(newItem.name.rainbow)
@@ -111,7 +124,8 @@ const resolvers = {
                     return Inventory.findOneAndUpdate(
                             {_id: userId}, 
                         {
-                            $inc:{'items.$[e].numInInv': 1},
+                            $inc:{'items.$[e].numInInv': 1, count: 1},
+                            'items.$[e].updateTime': newItem.updateTime
                             // $set:{'items.$[e]':{
                             //     ...newItem,
                             //     imgUrl:`${itemsImgPath}${newItem.imgUrl}`,
@@ -146,7 +160,8 @@ const resolvers = {
                 }
                 return Inventory.findOneAndUpdate(
                     {_id:userId},
-                    { $push: { items: 
+                    { $inc:{count: 1},
+                        $push: { items: 
                         { $each: [{
                             ...newItem, 
                             imgUrl:`${itemsImgPath}${newItem.imgUrl}`, 
@@ -180,21 +195,32 @@ const resolvers = {
         },
 
         changeGoldAmount (parent, args, context, info) {
-            const {userId, amount} = args
-            const succesMessage = `${amount >= 0? 'Успішно додано':'Витрачено'} ${Math.abs(amount)} дзвіночків`;
+            const {token, amount} = args,
+                userId = jwt.decode(token).userId;
 
-            return User.findOne({userId}).
+            let userLvl, newAmount, succesMessage
+
+            return User.findOne({_id: userId}).
                 then(res => {
-                    if(amount < 0 && (res.gold - Math.abs(amount)) < 0){
+                    userLvl = res.stats.lvl.currentLvl
+                    if(amount){
+                        console.log(amount)
+                        newAmount = amount
+                    } else{
+                        newAmount = userLvl*between(1,5)
+                    }
+                    succesMessage = `${newAmount >= 0? 'Успішно додано':'Витрачено'} ${Math.abs(newAmount)} шерсті`;
+
+                    if(newAmount < 0 && (res.gold - Math.abs(newAmount)) < 0){
                         return {
                             success: false,
-                            message: `У вас не вистачає ${Math.abs(res.gold - Math.abs(amount))} дзвіночків для покупки`,
+                            message: `У вас не вистачає ${Math.abs(res.gold - Math.abs(newAmount))} шерсті для покупки`,
                             user: res
                         }
                     }
                     return User.findOneAndUpdate(
-                    {userId}, 
-                    {$inc: {gold: amount}}, 
+                    {_id: userId}, 
+                    {$inc: {gold: newAmount}}, 
                     {useFindAndModify: false, new: true}
                     ).
                     then(res => {
@@ -244,19 +270,58 @@ const resolvers = {
         },
 
         inventory (parent, args, context, info) {
-            return Inventory.findOne({ user: args.username })
+            const {token, offset, limit} = args,
+            userId = jwt.decode(token).userId;
+            console.log(userId, 'offset',offset, 'limit ',limit)
+
+            return Inventory.aggregate([
+                {$match:{'_id': mongoose.Types.ObjectId(userId)}},
+                // { $project : { 'items' : 1 } },
+                {$unwind: "$items"},
+
+                {"$skip":offset||0},
+                {"$limit":limit||5},
+                
+                
+                {"$group":{
+                    "_id":'$_id',
+                    "items":{"$push":{
+                        "name":"$items.name",
+                        "lvl":"$items.lvl",
+                        "imgUrl":"$items.imgUrl",
+                        "category": "$items.category",
+                        "rarity": "$items.rarity",
+                        "itemId": "$items.itemId",
+                        "numInWorld": "$items.numInWorld",
+                        "numInInv": "$items.numInInv",
+                        "updateTime": "$items.updateTime",
+                    }, },
+                    "count":{"$first":"$count"}
+                }},
+                
+                // {"$sort":{"item.updateTime":-1}},
+            ])
                 .then (res => {
-                    console.log(res.items)
                     if (!res) {
                         return{
                             success: false,
                             message: `За вашим запитом нічого не знайдено`,
                         }
                     }
+                    if(!res[0]?.items?.length){
+                        console.log('none')
+                        return{
+                            success: true,
+                            message: `Це все, ви досягли кінця`,
+                            items: []
+                        }
+                    }
+                    // console.log(res[0].items)
                     return{
                         success: true,
                         message: `Ви отримали свій інвентар`,
-                        items: res.items
+                        items: res[0].items,
+                        count: res[0].count
                     }
                 })
                 .catch (err => {
@@ -270,9 +335,9 @@ const resolvers = {
 
         async me (parent, args, context, info) {
             const { username, password } = args
-
+            console.log(username, password)
 			const user = await User.findOne({ username })
-
+            console.log(user._id)
             //Користувач з таким ім'ям не знайдений
 			if (!user) {
 				return {
@@ -296,18 +361,17 @@ const resolvers = {
 			const token = jwt.sign(
                 {
                     username,
-                    userId: user.userId
+                    userId: user._id
                 }, 
                 config.get('jwtSecret'), 
                 { expiresIn: '1m' }
                 )
 
-                console.log(jwt.decode(token))
             //Відповідь успішного входу
             return {
                 success: true,
                 message: 'Успішна авторизація',
-                token: `Bearer ${token}`,
+                token,
                 user
             }
         }

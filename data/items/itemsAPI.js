@@ -1,10 +1,12 @@
-const equipments = require('./equipments.json'),
-    collectibles = require('./collectibles.json'),
-    pets = require('./pets.json'),
-    backgrounds = require('./backgrounds.json'),
-    avatars = require('./avatars.json')
+const collectible = require('./collectibles.json'),
+    brush = require('./brushes.json'),
+    scissors = require('./scissors.json'),
+    potion = require('./potions.json'),
+    pet = require('./pets.json'),
+    avatar = require('./avatars.json'),
+    background = require('./backgrounds.json')
 
-    const colors = require('colors');
+const colors = require('colors');
 
 const rarityChances = require('./chances/rarityChances.json'),
     typeChances = require('./chances/typeChances.json')
@@ -12,11 +14,13 @@ const rarityChances = require('./chances/rarityChances.json'),
 const itemsImgPath = 'http://192.168.0.104:5000/images/items/';
 
 const items = {
-    equipments,
-    collectibles,
-    pets,
-    backgrounds,
-    avatars
+    collectible,
+    brush,
+    scissors,
+    potion,
+    pet,
+    avatar,
+    background
 }
 
 const chances = {

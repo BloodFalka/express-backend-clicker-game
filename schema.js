@@ -2,7 +2,7 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   type User {
-    userId: ID!,
+    _id: String!,
     username: String!,
     password: String!,
     stats: Stats!,
@@ -41,26 +41,34 @@ const typeDefs = gql`
     rarity: String!,
     itemId: String!,
     numInWorld: Int!,
-    numInInv: Int!
+    numInInv: Int!,
+    updateTime: String!
   },
 
   type Query {
     users: [User!]!,
     user(username: String!): User!,
     me(username: String!, password: String!): GetMeResponce!,
-    inventory(userId: String!): GetInvResponce!,
+    inventory(token: String!, offset: Int, limit: Int): GetInvResponce!,
   }
 
   type Mutation {
-        addUser (username: String!, password: String!): UpdateResponce!,
-        changeGoldAmount (userId: String!, amount: Int!): UpdateResponce!,
-        addItemToInventory (userId: String!): NewItemResponce!
+        addUser (username: String!, password: String!): NewUserResponce!,
+        changeGoldAmount (token: String!, amount:Int): UpdateResponce!,
+        addItemToInventory (token: String!): NewItemResponce!
     }
 
     type UpdateResponce {
       success: Boolean!
       message: String!
       user: User
+    }
+
+    type NewUserResponce {
+      success: Boolean!
+      message: String!
+      user: User
+      token: String
     }
 
     type NewItemResponce {
@@ -80,7 +88,11 @@ const typeDefs = gql`
       success: Boolean!
       message: String!
       items: [Item]
+      count: Int
     }
+
+
 `;
+
 
 module.exports = typeDefs;
