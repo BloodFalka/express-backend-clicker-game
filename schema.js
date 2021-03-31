@@ -55,7 +55,8 @@ const typeDefs = gql`
   type Mutation {
         addUser (username: String!, password: String!): NewUserResponce!,
         changeGoldAmount (token: String!, amount:Int): UpdateResponce!,
-        addItemToInventory (token: String!): NewItemResponce!
+        addItemToInventory (token: String!): NewItemResponce!,
+        addXp (token: String!): UpdateResponce!
     }
 
     type UpdateResponce {

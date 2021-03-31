@@ -242,7 +242,44 @@ const resolvers = {
                 }).catch(err => {
                     console.error(error)
                 })
-            }
+            },
+
+            addXp (parent, args, context, info) {
+                const {token} = args,
+                    userId = jwt.decode(token).userId;
+    
+                return User.findOne({_id: userId}).
+                    then(res => {
+                       
+                        const userLvl = res.stats.lvl.currentLvl
+                        const randomXp = userLvl*between(1,3)
+                        console.log(randomXp)
+                        return User.findOneAndUpdate(
+                        {_id: userId}, 
+                        {$inc: {'stats.lvl.xp': randomXp}}, 
+                        {useFindAndModify: false, new: true}
+                        ).
+                        then(res => {
+                            
+                            if(res){
+                                return {
+                                    success: true,
+                                    message: `Ви здобули досвіду: ${randomXp} `,
+                                    user: res
+                                }
+                            }
+                            return {
+                                success: false,
+                                message: 'Користувач не знайдений',
+                                user: res
+                            }
+                        }).catch(err => {
+                            console.error(error)
+                        })
+                    }).catch(err => {
+                        console.error(error)
+                    })
+                }
         },
 
     Query: {
