@@ -1,0 +1,34 @@
+{
+    "epic":[
+        {
+            "name": "Тімоха",
+            "lvl": 1,
+            "imgUrl": "cat1.png",
+            "id": "avDef1"
+        },
+        {
+            "name": "Сіроха",
+            "lvl": 1,
+            "imgUrl": "cat2.png",
+            "id": "avDef2"
+        },
+        {
+            "name": "Болотний Троль",
+            "lvl": 1,
+            "imgUrl": "cat4.png",
+            "id": "avDef3"
+        },
+        {
+            "name": "Машенька",
+            "lvl": 1,
+            "imgUrl": "cat6.png",
+            "id": "avDef4"
+        },
+        {
+            "name": "Колень",
+            "lvl": 1,
+            "imgUrl": "mooseCat.png",
+            "id": "avDef5"
+        }
+    ]
+}

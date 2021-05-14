@@ -1,8 +1,9 @@
 
 [
     {"collectible": 50},
-    {"brush": 24.3},
-    {"scissors": 24.3},
+    {"glove": 16.2},
+    {"brush": 16.2},
+    {"scissors": 16.2},
     {"potion": 1},
     {"pet": 0.2},
     {"avatar": 0.1},

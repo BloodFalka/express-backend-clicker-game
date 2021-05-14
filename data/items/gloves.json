@@ -1,0 +1,80 @@
+{
+    "common":[
+        {
+            "name": "З Сільпо",
+            "lvl": 1,
+            "imgUrl": "gloves/cm/glove10tr.png",
+            "id": "glCm1"
+        },
+        {
+            "name": "Фазенда",
+            "lvl": 2,
+            "imgUrl": "gloves/cm/glove9.png",
+            "id": "glCm2"
+        },
+        {
+            "name": "Фрекенбок",
+            "lvl": 3,
+            "imgUrl": "gloves/cm/glove3.png",
+            "id": "glCm3"
+        }
+    ],
+    "uncommon":[
+        {
+            "name": "Натяк",
+            "lvl": 5,
+            "imgUrl": "gloves/uc/glove1.png",
+            "id": "glUc1"
+        },
+        {
+            "name": "Огірок",
+            "lvl": 10,
+            "imgUrl": "gloves/uc/glove5.png",
+            "id": "glUc2"
+        }
+    ],
+    "rare":[
+        {
+            "name": "Скубі Підліток-Мутант",
+            "lvl": 25,
+            "imgUrl": "gloves/ra/glove7.png",
+            "id": "glRa1"
+        },
+        {
+            "name": "Квочечка",
+            "lvl": 35,
+            "imgUrl": "gloves/ra/glove4.png",
+            "id": "glRa2"
+        }
+    ],
+    "epic":[
+        {
+            "name": "Бузок",
+            "lvl": 30,
+            "imgUrl": "gloves/ep/glove11.png",
+            "id": "glEp1"
+        },
+        {
+            "name": "Ядерні відходи",
+            "lvl": 30,
+            "imgUrl": "gloves/ep/glove8.png",
+            "id": "glEp1"
+        }
+    ],
+    "legendary":[
+        {
+            "name": "Грибний Тріп",
+            "lvl": 100,
+            "imgUrl": "gloves/le/glove2.png",
+            "id": "glLe1"
+        }
+    ],
+    "exotic":[
+        {
+            "name": "Guns N(o)' Roses",
+            "lvl": 1000,
+            "imgUrl": "gloves/ex/glove6.png",
+            "id": "glEx1"
+        }
+    ]
+}

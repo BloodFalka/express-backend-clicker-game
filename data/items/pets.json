@@ -4,7 +4,7 @@
             "name": "test",
             "lvl": 100,
             "imgUrl": "pets/panda.png",
-            "itemId": "petUc1"
+            "id": "petUc1"
         }
     ],
     "rare":[
@@ -12,7 +12,7 @@
             "name": "test",
             "lvl": 100,
             "imgUrl": "pets/panda.png",
-            "itemId": "petRa1"
+            "id": "petRa1"
         }
     ],
     "epic":[
@@ -20,7 +20,7 @@
             "name": "панда",
             "lvl": 100,
             "imgUrl": "pets/panda.png",
-            "itemId": "petEp1"
+            "id": "petEp1"
         }
     ],
     "legendary":[
@@ -28,7 +28,7 @@
             "name": "мая",
             "lvl": 100,
             "imgUrl": "pets/maya.png",
-            "itemId": "petLe1"
+            "id": "petLe1"
         }
     ],
     "exotic":[
@@ -36,7 +36,7 @@
             "name": "єржан",
             "lvl": 1,
             "imgUrl": "pets/erzhan.png",
-            "itemId": "petEx1"
+            "id": "petEx1"
         }
     ]
 }

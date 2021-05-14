@@ -9,10 +9,12 @@ const schema = new Schema({
             imgUrl: {type:String, require:true},
             category: {type:String, require:true},
             rarity: {type:String, require:true},
-            itemId: {type:String, require:true},
+            id: {type:String, require:true},
             numInWorld: {type:Number, require:true},
             numInInv: {type:Number, require: true, default: 1},
-            updateTime: {type:Date, require: true}
+            updateTime: {type:Date, require: true},
+            tradable: {type: Boolean, required: true, default: true},
+            isEquipped: {type: Boolean, required: true, default: false},
         }
     ]
 })

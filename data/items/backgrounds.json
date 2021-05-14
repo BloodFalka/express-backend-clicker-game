@@ -4,7 +4,7 @@
             "name": "мая",
             "lvl": 1,
             "imgUrl": "pets/maya.png",
-            "itemId": "bgLe1"
+            "id": "bgLe1"
         }
     ],
     "exotic":[
@@ -12,7 +12,7 @@
             "name": "єржан",
             "lvl": 1,
             "imgUrl": "pets/erzhan.png",
-            "itemId": "bgEx1"
+            "id": "bgEx1"
         }
     ]
 }

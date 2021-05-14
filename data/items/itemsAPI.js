@@ -1,4 +1,5 @@
 const collectible = require('./collectibles.json'),
+    glove = require('./gloves.json'),
     brush = require('./brushes.json'),
     scissors = require('./scissors.json'),
     potion = require('./potions.json'),
@@ -11,10 +12,11 @@ const colors = require('colors');
 const rarityChances = require('./chances/rarityChances.json'),
     typeChances = require('./chances/typeChances.json')
 
-const itemsImgPath = 'http://192.168.0.104:5000/images/items/';
+const itemsImgPath = 'http://192.168.0.100:5000/images/items/';
 
 const items = {
     collectible,
+    glove,
     brush,
     scissors,
     potion,
@@ -30,7 +32,7 @@ const chances = {
 
 
 const randomChanceFromArray = (a, cat) => {
-    const randPerc = +(Math.random()*100).toFixed(2);
+    const randPerc = randomInPercent();
     
     let accum = 0;
 
@@ -67,7 +69,13 @@ const randomChanceFromArray = (a, cat) => {
     }
 }
 
+const randomInPercent = () => +(Math.random()*100).toFixed(2)
+
+const randomInPercentSucces = (percent) => randomInPercent()<=percent?true:false
+
 module.exports.items = items
 module.exports.itemsImgPath = itemsImgPath
 module.exports.chances = chances
 module.exports.randomChanceFromArray = randomChanceFromArray
+module.exports.randomInPercent = randomInPercent
+module.exports.randomInPercentSucces = randomInPercentSucces

@@ -4,19 +4,19 @@
             "name": "101 Далматинець",
             "lvl": 1,
             "imgUrl": "scissors/cm/noz.png",
-            "itemId": "scisCm1"
+            "id": "scisCm1"
         },
         {
             "name": "Спаржа",
             "lvl": 2,
             "imgUrl": "scissors/cm/noz1.png",
-            "itemId": "scisCm2"
+            "id": "scisCm2"
         },
         {
             "name": "Голден Гусь",
             "lvl": 3,
             "imgUrl": "scissors/cm/noz2.png",
-            "itemId": "scisCm3"
+            "id": "scisCm3"
         }
     ],
     "uncommon":[
@@ -24,7 +24,7 @@
             "name": "Швачка",
             "lvl": 5,
             "imgUrl": "scissors/uc/noz3.png",
-            "itemId": "scisUc1"
+            "id": "scisUc1"
         }
     ],
     "rare":[
@@ -32,7 +32,7 @@
             "name": "Брітні",
             "lvl": 25,
             "imgUrl": "scissors/ra/noz4.png",
-            "itemId": "scisRa1"
+            "id": "scisRa1"
         }
     ],
     "epic":[
@@ -40,7 +40,7 @@
             "name": "Епічна Брітні",
             "lvl": 50,
             "imgUrl": "scissors/ra/noz4.png",
-            "itemId": "scisEp1"
+            "id": "scisEp1"
         }
     ],
     "legendary":[
@@ -48,7 +48,7 @@
             "name": "Легендарна Брітні",
             "lvl": 100,
             "imgUrl": "scissors/ra/noz4.png",
-            "itemId": "scisLe1"
+            "id": "scisLe1"
         }
     ],
     "exotic":[
@@ -56,7 +56,7 @@
             "name": "Екзотична Брітні",
             "lvl": 1000,
             "imgUrl": "scissors/ra/noz4.png",
-            "itemId": "scisEx1"
+            "id": "scisEx1"
         }
     ]
 }

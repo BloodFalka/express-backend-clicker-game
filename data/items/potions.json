@@ -4,19 +4,19 @@
             "name": "Зілля сили огра",
             "lvl": 20,
             "imgUrl": "potions/ra/pois.png",
-            "itemId": "poiRa1"
+            "id": "poiRa1"
         },
         {
             "name": "Чорний диявол",
             "lvl": 20,
             "imgUrl": "potions/ra/pois3.png",
-            "itemId": "poiRa2"
+            "id": "poiRa2"
         },
         {
             "name": "Синька",
             "lvl": 20,
             "imgUrl": "potions/ra/pois4.png",
-            "itemId": "poiRa3"
+            "id": "poiRa3"
         }
     ],
     "epic":[
@@ -24,7 +24,7 @@
             "name": "Любовне зілля",
             "lvl": 50,
             "imgUrl": "potions/ep/pois4.png",
-            "itemId": "poiEp1"
+            "id": "poiEp1"
         }
     ],
     "legendary":[
@@ -32,7 +32,7 @@
             "name": "Легендарне Любовне зілля",
             "lvl": 500,
             "imgUrl": "potions/ep/pois4.png",
-            "itemId": "poiLe1"
+            "id": "poiLe1"
         }
     ],
     "exotic":[
@@ -40,7 +40,7 @@
             "name": "Екзотичне Любовне зілля",
             "lvl": 1000,
             "imgUrl": "potions/ep/pois4.png",
-            "itemId": "poiEx1"
+            "id": "poiEx1"
         }
     ]
 }

@@ -4,7 +4,7 @@
             "name": "Рибний Торт",
             "lvl": 1,
             "imgUrl": "collect/tort.png",
-            "itemId": "colCm1"
+            "id": "colCm1"
         }
     ],
     "uncommon":[
@@ -12,19 +12,19 @@
             "name": "Келих",
             "lvl": 1,
             "imgUrl": "collect/ctakan.png",
-            "itemId": "colUc1"
+            "id": "colUc1"
         },
         {
             "name": "Cушка",
             "lvl": 1,
             "imgUrl": "collect/susi.png",
-            "itemId": "colUc2"
+            "id": "colUc2"
         },
         {
             "name": "Корзинка радості",
             "lvl": 1,
             "imgUrl": "collect/korzina.png",
-            "itemId": "colUc3"
+            "id": "colUc3"
         }
     ],
     "rare":[
@@ -32,7 +32,7 @@
             "name": "Рідкісний Келих",
             "lvl": 1,
             "imgUrl": "collect/ctakan.png",
-            "itemId": "colRa1"
+            "id": "colRa1"
         }
     ],
     "epic":[
@@ -40,7 +40,7 @@
             "name": "Епічний Келих",
             "lvl": 1,
             "imgUrl": "collect/ctakan.png",
-            "itemId": "colEp1"
+            "id": "colEp1"
         }
     ],
     "legendary":[
@@ -48,7 +48,7 @@
             "name": "Легендарний Келих",
             "lvl": 1,
             "imgUrl": "collect/ctakan.png",
-            "itemId": "colLe1"
+            "id": "colLe1"
         }
     ],
     "exotic":[
@@ -56,7 +56,7 @@
             "name": "Екзотичний Келих",
             "lvl": 1,
             "imgUrl": "collect/ctakan.png",
-            "itemId": "colEx1"
+            "id": "colEx1"
         }
     ]
 }

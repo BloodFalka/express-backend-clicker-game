@@ -7,20 +7,28 @@ const typeDefs = gql`
     password: String!,
     stats: Stats!,
     gold: Int!,
-    # inventory: [Item],
+    equipment: Equipment!
+    background: EquipItem
+    avatar: EquipItem
   },
 
   type Stats {
-    lvl: Lvl,
-    damage: Damage,
+    lvl: Lvl!,
+    stage: Stage!,
+    damage: Damage!,
   },
 
   type Lvl {
-    xp: Int!,
+    currentLvlXp: Int!,
     currentLvl: Int!,
-    currentStage: Int!,
-    enemiesOnLvl: Int!,
   },
+
+  type Stage {
+    currentLocation: String!
+    currentStage: Int!,
+    currentCatOnStage: Int!,
+    catsOnStage: Int!,
+  }
 
   type Damage {
     dpc: Int!,
@@ -29,34 +37,97 @@ const typeDefs = gql`
     },
 
  type Critical{
-    chance: Int!,
-    multipler: Int!,
+    chance: Float!,
+    multipler: Float!,
  }
 
-  type Item {
+  type EquipItem {
     name: String!,
-    lvl: String!,
+    lvl: Int!,
     imgUrl: String!,
     category: String!,
     rarity: String!,
-    itemId: String!,
+    id: ID!,
     numInWorld: Int!,
     numInInv: Int!,
-    updateTime: String!
-  },
+    updateTime: String!,
+    tradable: Boolean!
+  }
+
+  type InventoryItem {
+    name: String!,
+    lvl: Int!,
+    imgUrl: String!,
+    category: String!,
+    rarity: String!,
+    id: ID!,
+    numInWorld: Int!,
+    numInInv: Int!,
+    updateTime: String!,
+    tradable: Boolean!,
+    isEquipped: Boolean!,
+  }
+
+  type Equipment {
+			glove: EquipItem,
+			brush: EquipItem,
+			scissors: EquipItem, 
+			pet: EquipItem,
+	},
+
+  type Cat {
+    name: String!,
+    power: Float!,
+    imgUrl: String!
+    hp: Int!
+    animation: Animation
+  }
+
+  type Animation{
+    keyframes: AnimationFrames
+    rows: Int
+    columns: Int
+    fps: Int
+  }
+
+  type AnimationFrames {
+    walk: [Int!]
+    appear: [Int!]
+    die: [Int!]
+  }
 
   type Query {
     users: [User!]!,
-    user(username: String!): User!,
+    user(username: String, token: String): User!,
     me(username: String!, password: String!): GetMeResponce!,
     inventory(token: String!, offset: Int, limit: Int): GetInvResponce!,
+    cat(token: String!): GetCatResponce!,
+    defaultAvas: GetDefaultAvasResponse!
   }
 
+
   type Mutation {
-        addUser (username: String!, password: String!): NewUserResponce!,
-        changeGoldAmount (token: String!, amount:Int): UpdateResponce!,
-        addItemToInventory (token: String!): NewItemResponce!,
-        addXp (token: String!): UpdateResponce!
+      addUser (username: String!, password: String!, avatar: Int!): NewUserResponce! ,
+      changeGoldAmount (token: String!, amount:Int): UpdateResponce!,
+      addItemToInventory (token: String!): ItemChangeResponce!,
+      addXp (token: String!):  AddXpResponse!
+      catBrushed(token: String!): UpdateResponce!
+      changeLvl(token: String!, operator:String): UpdateResponce!# operator 'inc'|'dec'
+
+      changeAvatar(token: String!, avatarId: String!): ItemChangeResponce!
+  }
+
+    type GetDefaultAvasResponse {
+      success: Boolean!
+      message: String!
+      avatars: [String]
+    }
+
+    type AddXpResponse {
+      success: Boolean!
+      message: String!
+      user: User
+      isNewLvl: Boolean
     }
 
     type UpdateResponce {
@@ -72,10 +143,10 @@ const typeDefs = gql`
       token: String
     }
 
-    type NewItemResponce {
+    type ItemChangeResponce {
       success: Boolean!
       message: String!
-      item: Item
+      item: InventoryItem
     }
 
     type GetMeResponce {
@@ -88,11 +159,15 @@ const typeDefs = gql`
     type GetInvResponce{
       success: Boolean!
       message: String!
-      items: [Item]
+      items: [InventoryItem]
       count: Int
     }
 
-
+    type GetCatResponce{
+      success: Boolean!
+      message: String!
+      cat: Cat
+    }
 `;
 
 
