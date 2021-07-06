@@ -1,5 +1,6 @@
+const Message = require('../models/chat/Message')
 const User = require('../models/User')
-const Inventory = require('../models/Inventory')
+const Inventory = require('../models/inventory/Inventory')
 const bcrypt = require('bcryptjs')
 const { items, chances, itemsImgPath, randomChanceFromArray, randomInPercentSucces } = require('../data/items/itemsAPI')
 const {locations, catsImgPath} = require('../data/cats/catsAPI')
@@ -11,7 +12,8 @@ const {defAvatars, avasImgPath} = require('../data/defaultAvatars/defAvatarsAPI'
 
 const mongoose = require('mongoose')
 const colors = require('colors')
-const { findOneAndUpdate } = require('../models/User')
+const { nanoid } = require('nanoid')
+const { options } = require('mongoose')
 
 const itemChance = 10
 
@@ -61,11 +63,24 @@ const resolvers = {
 
 			const selectedAvatar = defAvatarsWithImg[avatar]
 
+			//Береться рандомний кіт
+			const randomCat = equalRandomFromArray(locations['grassland']['common'])
+			const currentCat = {
+				...randomCat,
+				imgUrl: `${catsImgPath}${randomCat.imgUrl}`,
+				hp: Math.ceil(randomCat.power*10)
+			}
+
 			//Створення нового користувача
 			const userObj = new User({
 				username,
 				password: hashedPassword,
-				avatar: selectedAvatar
+				avatar: selectedAvatar,
+				stats:{
+					stage:{
+						currentCat
+					}
+				}
 				// userId: nanoid()
 			})
 
@@ -436,7 +451,12 @@ const resolvers = {
 						return {
 							success: true,
 							message: `Успішно встановлено аватар `,
-							item: selectedItem
+							item: selectedItem,
+							user:{
+								...user,
+								_id: user._id,
+								avatar: selectedItem
+							}
 						}
 					}).catch(e=>{
 						console.error(e)
@@ -490,9 +510,11 @@ const resolvers = {
 		catBrushed(parent, args, context, info){
 			const { token } = args,
 			userId = jwt.decode(token).userId
+
+			console.log(token)
 			return User.findOne({_id: userId}).then((user)=>{
 				
-				let {currentCatOnStage, currentStage} = user.stats.stage
+				let {currentCatOnStage, currentStage, currentLocation} = user.stats.stage
 				let {currentLvl} = user.stats.lvl
 
 				let catsOnStage = Math.floor(currentLvl/100)+10
@@ -518,12 +540,22 @@ const resolvers = {
 
 				console.log('NextStage', isNextStage, 'cat:'.red,currentCatOnStage, 'stage:'.red, currentStage)
 
+				const catType = IsNextBoss? 'bosses': 'common'
+				const randomCat = equalRandomFromArray(locations[currentLocation][catType])
+				const currentCat = {
+					...randomCat,
+					imgUrl: `${catsImgPath}${randomCat.imgUrl}`,
+					hp: Math.ceil(randomCat.power*10*currentStage)
+				}
+				console.log(currentCat)
+
 				return User.findOneAndUpdate(
 					{ _id: userId },
 					{
 						'stats.stage.currentCatOnStage': currentCatOnStage,
 						'stats.stage.currentStage': currentStage,	
-						'stats.stage.catsOnStage': catsOnStage,		
+						'stats.stage.catsOnStage': catsOnStage,
+						'stats.stage.currentCat': currentCat	
 					},
 					{ useFindAndModify: false, new: true }
 					)
@@ -557,6 +589,78 @@ const resolvers = {
 				}
 			})
 		},
+
+		toggleLike(parent, args, context, info){
+			const { token, messageId } = args,
+				userId = jwt.decode(token).userId
+			
+			Message.findOneAndUpdate({id: messageId},
+				{ $push: {
+					likes: userId
+				}},
+				{ useFindAndModify: false, new: true, upsert: true }
+			)
+			.then((res) => {
+				console.log(res)
+				return{
+					success: false,
+					message: `Помилка Сервера`,
+					userMessage: res
+				}
+			}).catch((err)=>{
+				console.error(err)
+				return {
+					success: false,
+					message: `Помилка Сервера`,
+				}
+			})
+		},
+
+		sendMessage(parent, args, context, info){
+			const { token, body } = args,
+				userId = jwt.decode(token).userId
+
+			return User.findOne({_id: userId})
+				.then((user)=>{
+					const avatarUrl = user.avatar.imgUrl,
+						// backgroundUrl = user.background.imgUrl,
+						username = user.username
+
+					const newMessage = new Message({
+						id: nanoid(),
+						body,
+						createTime: new Date(),
+						likes: [],
+						user: {
+							id: userId,
+							username,
+							avatarUrl,
+							backgroundUrl: 'http://192.168.0.100:5000/images/items/backgrounds/bgCanyon.png',//need real ava
+						}
+					})
+
+					return newMessage.save().then(()=>{
+						return {
+							success: true,
+							message: `Успішно відправлено повідомлення`,
+							userMessage: {...newMessage._doc, animation: true}
+						}
+					}).catch((err)=>{
+						console.error(err)
+						return {
+							success: false,
+							message: `Помилка Сервера`,
+						}
+					})
+		
+				}).catch((err)=>{
+					console.error(err)
+					return {
+						success: false,
+						message: `Помилка Сервера`,
+					}
+				})
+		}
 	},
 
 	Query: {
@@ -585,6 +689,107 @@ const resolvers = {
 					console.error(err)
 				})
 		},
+
+		messages(parent, args, context, info) {
+			const {offset, limit } = args
+			console.log('offset', offset, 'limit ', limit)
+
+			return Message.find().sort({_id:-1}).skip(offset||0).limit(limit||15)
+				.then((messages) => {
+
+					if (!messages.length) {
+						console.log('none')
+						return {
+							success: true,
+							message: `Це все, ви досягли кінця`,
+							userMessages: [],
+						}
+					}
+
+					return {
+						success: true,
+						message: `Успішно отримано всі повідомлення`,
+						userMessages: messages.map((r) => ({ ...r._doc, animation: false })),
+					}
+				})
+				.catch((err) => {
+					console.error(err)
+					return {
+						success: false,
+						message: `Помилка Сервера`,
+						userMessages: [],
+					}
+				})
+		},
+
+		// messages(parent, args, context, info) {
+		// 	const { token, offset, limit } = args,
+		// 		userId = jwt.decode(token).userId
+		// 	console.log('offset', offset, 'limit ', limit)
+			
+		// 	return Inventory.aggregate([
+		// 		{ $match: { _id: mongoose.Types.ObjectId(userId) } },
+		// 		// { $project : { 'items' : 1 } },
+		// 		{ $unwind: '$items' },
+
+		// 		{ $skip: offset || 0 },
+		// 		{ $limit: limit || 15 },
+
+		// 		{
+		// 			$group: {
+		// 				_id: '$_id',
+		// 				items: {
+		// 					$push: {
+		// 						name: '$items.name',
+		// 						lvl: '$items.lvl',
+		// 						imgUrl: '$items.imgUrl',
+		// 						category: '$items.category',
+		// 						rarity: '$items.rarity',
+		// 						id: '$items.id',
+		// 						numInWorld: '$items.numInWorld',
+		// 						numInInv: '$items.numInInv',
+		// 						tradable: '$items.tradable',
+		// 						isEquipped: '$items.isEquipped',
+		// 						updateTime: '$items.updateTime',
+		// 					},
+		// 				},
+		// 				count: { $first: '$count' },
+		// 			},
+		// 		},
+
+		// 		// {"$sort":{"item.updateTime":-1}},
+		// 	])
+		// 		.then((res) => {
+		// 			if (!res) {
+		// 				return {
+		// 					success: false,
+		// 					message: `За вашим запитом нічого не знайдено`,
+		// 				}
+		// 			}
+		// 			if (!res[0]?.items?.length) {
+		// 				console.log('none')
+		// 				return {
+		// 					success: true,
+		// 					message: `Це все, ви досягли кінця`,
+		// 					items: [],
+		// 				}
+		// 			}
+		// 			// console.log(res[0].items)
+		// 			return {
+		// 				success: true,
+		// 				message: `Ви отримали свій інвентар`,
+		// 				items: res[0].items,
+		// 				count: res[0].count,
+		// 			}
+		// 		})
+		// 		.catch((err) => {
+		// 			console.error(err)
+		// 			return {
+		// 				success: false,
+		// 				message: `Невідома помилка`,
+		// 			}
+		// 		})
+		// },
 
 		inventory(parent, args, context, info) {
 			const { token, offset, limit } = args,

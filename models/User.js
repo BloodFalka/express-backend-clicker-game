@@ -1,16 +1,5 @@
 const { Schema, model } = require('mongoose')
-
-
-const Item = {
-	id: { type: String, required: true, unique: true },
-	numInWorld: {type: Number, required: true},
-	name: {type: String, required: true},
-	lvl: {type: Number, required: true},
-	imgUrl: {type: String, required: true},
-	category: {type: String, required: true},
-	rarity: {type: String, required: true},
-	tradable: {type: Boolean, required: true, default: true}
-}
+const {Item} = require('./Item')
 
 const schema = new Schema({
 	username: { type: String, required: true, unique: true },
@@ -29,6 +18,22 @@ const schema = new Schema({
 			currentStage: { type: Number, required: true, default: 1 },
 			currentCatOnStage: { type: Number, required: true, default: 1 },
 			catsOnStage: { type: Number, required: true, default: 10 },
+			currentCat: {
+				name: {type: String, required: true},
+				power: {type: Number, required: true},
+				imgUrl: {type: String, required: true},
+				hp: {type: Number, required: true},
+				animation: {
+					keyframes:  {
+						walk: {type: Array, required: false},
+						appear: {type: Array, required: false},
+						die: {type: Array, required: false},
+					},
+					rows: {type: Number, required: false},
+					columns: {type: Number, required: false},
+					fps: {type: Number, required: false},
+				}
+			}
 		},
 		damage: {
 			dpc: { type: Number, required: true, default: 1 },
@@ -46,7 +51,8 @@ const schema = new Schema({
 		pet: Item|null,
 	},
 	avatar: Item|null,
-	background: Item|null
+	background: Item|null,
 })
 
 module.exports = model('User', schema)
+

@@ -2,7 +2,7 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   type User {
-    _id: String!,
+    _id: ID!,
     username: String!,
     password: String!,
     stats: Stats!,
@@ -28,6 +28,7 @@ const typeDefs = gql`
     currentStage: Int!,
     currentCatOnStage: Int!,
     catsOnStage: Int!,
+    currentCat: Cat!
   }
 
   type Damage {
@@ -96,13 +97,30 @@ const typeDefs = gql`
     die: [Int!]
   }
 
+  type Message {
+    id: ID!,
+    body: String!,
+    createTime: String!,
+    likes: [String]!,
+    user: MessageSendler!
+    animation: Boolean!
+  }
+
+  type MessageSendler {
+    id: String!,
+    username: String!,
+    avatarUrl: String!,
+    backgroundUrl: String!,
+  }
+
   type Query {
     users: [User!]!,
     user(username: String, token: String): User!,
     me(username: String!, password: String!): GetMeResponce!,
     inventory(token: String!, offset: Int, limit: Int): GetInvResponce!,
     cat(token: String!): GetCatResponce!,
-    defaultAvas: GetDefaultAvasResponse!
+    defaultAvas: GetDefaultAvasResponse!,
+    messages(offset: Int, limit: Int): GetMessagesResponce!
   }
 
 
@@ -113,8 +131,9 @@ const typeDefs = gql`
       addXp (token: String!):  AddXpResponse!
       catBrushed(token: String!): UpdateResponce!
       changeLvl(token: String!, operator:String): UpdateResponce!# operator 'inc'|'dec'
-
       changeAvatar(token: String!, avatarId: String!): ItemChangeResponce!
+      sendMessage(token: String!, body: String!): MessageMutationResponce!
+      toggleLike(token: String!, messageId: String!): MessageMutationResponce!
   }
 
     type GetDefaultAvasResponse {
@@ -146,7 +165,8 @@ const typeDefs = gql`
     type ItemChangeResponce {
       success: Boolean!
       message: String!
-      item: InventoryItem
+      item: InventoryItem,
+      user: User
     }
 
     type GetMeResponce {
@@ -167,6 +187,18 @@ const typeDefs = gql`
       success: Boolean!
       message: String!
       cat: Cat
+    }
+
+    type GetMessagesResponce{
+      success: Boolean!
+      message: String!
+			userMessages: [Message]
+    }
+
+    type MessageMutationResponce{
+      success: Boolean!
+      message: String!
+			userMessage: Message
     }
 `;
 
